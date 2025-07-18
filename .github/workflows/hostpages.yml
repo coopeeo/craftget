@@ -1,0 +1,29 @@
+name: Host Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+    
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Move files to dist
+        run: |
+          mkdir -p dist
+          cp -r install.lua dist/
+
+      - name: upload files
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./dist
+    
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
