@@ -13,7 +13,7 @@ while true do
     elseif key == keys.n then
         term.setCursorPos(cursorPosX + 1, 0)
         term.write("Installation canceled.")
-        os.exit(1, true)
+        return
     end
 end
 term.write("testing")
