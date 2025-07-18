@@ -4,16 +4,31 @@ local conformationMsg = "Are you sure you want to install CraftGet? (y/n): "
 term.write(conformationMsg)
 term.setCursorPos(cursorPosX + #conformationMsg, cursorPosY)
 
+local function somethingcursor()
+    local _, y = term.getCursorPos()
+    local _, h = term.getSize()
+    if y == h then
+        term.scroll(1)
+        term.setCursorPos(1, y)
+    else
+        term.setCursorPos(1, y + 1)
+    end
+end
+
 while true do
     local event, key, is_held = os.pullEvent("key")
     if key == keys.y then
-        term.setCursorPos(cursorPosX + 1, 0)
+        somethingcursor()
         term.write("Installing CraftGet...")
-        break;
+        break
     elseif key == keys.n then
-        term.setCursorPos(cursorPosX + 1, 0)
+        somethingcursor()
         term.write("Installation canceled.")
-        exit()
+        return false
     end
 end
+term.write("testing3")
+
+do return false end
+
 term.write("testing")
